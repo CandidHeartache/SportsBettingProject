@@ -2,4 +2,8 @@ this is a test file.
 I am now changin it to test a commit.
 Now I am testing a branch on Github Desktop
 tlsdfkjhglsdkjgf
+<<<<<<< HEAD
 NEW LINE HERE
+=======
+new new line here
+>>>>>>> parent of 8f07bf6... Update test.txt
