@@ -5,7 +5,9 @@ Created on Sun Aug 16 12:56:55 2020
 @author: sealo
 """
 
-import loginscript
+import loginscript as ls
+import pandas as pd
+trading = ls.trading
 
 event_types = trading.betting.list_event_types()
 
