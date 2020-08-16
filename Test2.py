@@ -56,29 +56,28 @@ competition_filter = bfl.filters.market_filter(
 competition = trading.betting.list_competitions(
     filter=competition_filter)
 
-for comp in competition:
-    print(comp.competition.name + comp.competition.id)
+#for comp in competition:
+#    print(comp.competition.name + comp.competition.id)
     
     
 #create a filter on the competition ID (or name?) for 2020 US Presidential Election
-US_elec_filter = bfl.filters.market_filter(
-        competition_ids=[10393583],
-        max_results = '100'
+politics_filter = bfl.filters.market_filter(
+        event_type_ids=[2378961],
         )
 
 
 #get a list of all events that come back under this filter as objects
 US_elec_events = trading.betting.list_events(
-        filter=US_elec_filter
+        filter=politics_filter,
         )
 
 #create a DF with all the events by iterating over each event object    
-US_elec_event_names = pd.DataFrame({
+politics_event_names = pd.DataFrame({
         'Event Name': [event_object.event.name for event_object in US_elec_events],
         'Event ID': [event_object.event.id for event_object in US_elec_events],
         })
 
-print(US_elec_event_names)
+print(politics_event_names)
 
 
 
