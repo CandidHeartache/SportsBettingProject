@@ -6,6 +6,7 @@ Created on Sun Aug 16 12:56:55 2020
 """
 
 import loginscript as ls
+import functions as fn
 import pandas as pd
 import datetime
 import betfairlightweight as bfl
@@ -18,8 +19,10 @@ trading = ls.trading
 # Finding the Event Type ID for Politics
 
 #making a filter for just Politics
+#the event type id for Politics is 2378961
+#the event id for USA - Presidential Election State Betting is 29959405
+# the event id for USA - Presidential Election 2020 is 28009878
 politics_filter = bfl.filters.market_filter(event_type_ids=[2378961])
-#politicsfilter = bfl.filters.market_filter(competition_ids=[10393583])
 
 filter2 = bfl.filters.market_filter(event_ids = [28009878])
 
@@ -42,7 +45,7 @@ state_market_books = trading.betting.list_market_book(
 
 print(state_market_books[TEST_INDEX].market_id)
 
-df2 = ls.process_runner_books(state_market_books[TEST_INDEX].runners)
+df2 = fn.process_runner_books(state_market_books[TEST_INDEX].runners)
 
 print(df2)
 
