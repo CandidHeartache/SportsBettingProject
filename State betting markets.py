@@ -24,7 +24,7 @@ trading = ls.trading
 # the event id for USA - Presidential Election 2020 is 28009878
 politics_filter = bfl.filters.market_filter(event_type_ids=[2378961])
 
-filter2 = bfl.filters.market_filter(event_ids = [28009878])
+filter2 = bfl.filters.market_filter(event_ids = [29959405])
 
 # Returns a list using the filter
 state_markets = trading.betting.list_market_catalogue(
@@ -32,23 +32,30 @@ state_markets = trading.betting.list_market_catalogue(
         max_results='100'
         )
 
-TEST_INDEX = 0
+TEST_INDEX = 1
 
 print(state_markets[TEST_INDEX].market_name)
 print(state_markets[TEST_INDEX].market_id)
 
 state_market_ids = [market.market_id for market in state_markets]
 
-state_market_books = trading.betting.list_market_book(
-        market_ids=state_market_ids
-        )
+price_filter = bfl.filters.price_projection(
+    price_data=['EX_BEST_OFFERS']
+)
 
-print(state_market_books[TEST_INDEX].market_id)
+df = pd.DataFrame()
+for market_id in state_market_ids:
+    state_market_book = trading.betting.list_market_book(
+            market_ids=[market_id],
+            price_projection=price_filter
+            )
+    tempdf = fn.process_runner_books(state_market_book[0].runners)
+    df = df.append(tempdf)
 
-df2 = fn.process_runner_books(state_market_books[TEST_INDEX].runners)
+print(df)
 
-print(df2)
-
-#this seems not to work because the 'ex' property of the market books is a None
-#suggest going back to the example and looking up how to apply PRICE FILTERS
-
+#this seems to work but runs very slowly
+#next steps:
+#work out a way to process runner books without using a df until the end
+#work out how many market ids can be passed to list_market_book so it can be done in batches
+#need to correctly label the runners and the markets
