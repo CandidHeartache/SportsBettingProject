@@ -44,13 +44,21 @@ price_filter = bfl.filters.price_projection(
 )
 
 df = pd.DataFrame()
-for market_id in state_market_ids:
+for n in range(5):
     state_market_book = trading.betting.list_market_book(
-            market_ids=[market_id],
+            market_ids=state_market_ids[n*10:n*10+10],
             price_projection=price_filter
             )
     tempdf = fn.process_runner_books(state_market_book[0].runners)
     df = df.append(tempdf)
+#    
+#for market_id in state_market_ids:
+#    state_market_book = trading.betting.list_market_book(
+#            market_ids=[market_id],
+#            price_projection=price_filter
+#            )
+#    tempdf = fn.process_runner_books(state_market_book[0].runners)
+#    df = df.append(tempdf)
 
 print(df)
 
