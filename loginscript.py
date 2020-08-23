@@ -15,7 +15,7 @@ import datetime
 import json
 from pathlib import Path
 
-
+outputs_path = "C:\\Sports betting\\"
 certs_path = "C:\\Sports betting\\Credentials\\"
 
 
