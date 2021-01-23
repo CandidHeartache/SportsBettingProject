@@ -1,0 +1,5 @@
+This Folder contains all of the premliminary work that went into Balckjack Select (Previously Fast Blackjack) including:
+
+Product efficacy
+Preliminary edge calculations (VCGLR submitted mathematics was completed by BMM)
+Calculation of projected hand rates.
